@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grammar - English App</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>语法学习</title>
 </head>
-
 <body>
-  <h1>Grammar Practice</h1>
 
-  <div id="grammarContent">
-    <p>What is the past tense of "go"?</p>
-    <button onclick="checkGrammar('went')">went</button>
-    <button onclick="checkGrammar('goed')">goed</button>
-  </div>
+<h2>语法学习</h2>
 
-  <p id="result"></p>
+<textarea id="grammar" placeholder="记录语法笔记"></textarea><br><br>
+<button onclick="saveGrammar()">保存</button>
 
-  <script src="app.js"></script>
+<br><br>
+<h3>你的语法记录：</h3>
+<div id="list"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="db.js"></script>
+
 </body>
 </html>
