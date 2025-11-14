@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vocabulary - English App</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>词汇学习</title>
 </head>
-
 <body>
-  <h1>Vocabulary Practice</h1>
 
-  <div id="wordBox">
-    <p id="word">dog</p>
-    <button onclick="nextWord()">Next Word</button>
-  </div>
+<h2>词汇学习</h2>
 
-  <script src="app.js"></script>
+<input id="word" placeholder="单词">
+<button onclick="addWord()">添加</button>
+
+<ul id="wordList"></ul>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="db.js"></script>
+
 </body>
 </html>
