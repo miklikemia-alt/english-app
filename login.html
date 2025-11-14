@@ -1,22 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>登录</title>
-</head>
-<body>
+import { supabase } from "./db.js";
 
-<h2>登录</h2>
+// 注册
+async function register(email, password) {
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
 
-<input id="email" placeholder="邮箱"><br><br>
-<input id="password" type="password" placeholder="密码"><br><br>
+    if (error) {
+        alert("注册失败：" + error.message);
+    } else {
+        alert("注册成功！请去邮箱确认登录。");
+    }
+}
 
-<button onclick="login()">登录</button>
-<br><br>
-<a href="register.html">没有账号？注册</a>
+// 登录
+async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="auth.js"></script>
+    if (error) {
+        alert("登录失败：" + error.message);
+    } else {
+        alert("登录成功！");
+        window.location.href = "index.html"; // 到首页
+    }
+}
 
-</body>
-</html>
+export { register, login };
