@@ -1,8 +1,8 @@
 {
   "name": "English App",
-  "short_name": "EnglishApp",
+  "short_name": "English",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "description": "Simple English learning app"
+  "theme_color": "#000000"
 }
