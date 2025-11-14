@@ -1,24 +1,35 @@
-document.getElementById("loginForm")?.addEventListener("submit", function (e) {
-  e.preventDefault();
+const SUPABASE_URL = "https://ezpmmgqenszyvfljjwcr.supabase.co";
+const SUPABASE_ANON_KEY = "你的 ANON KEY 放这里";
 
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  if (localStorage.getItem(user) === pass) {
-    alert("Login successful!");
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Wrong username or password!");
-  }
-});
+// 注册
+async function register() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
-document.getElementById("registerForm")?.addEventListener("submit", function (e) {
-  e.preventDefault();
+    let { error } = await supabase.auth.signUp({ email, password });
 
-  const newUser = document.getElementById("newUser").value;
-  const newPass = document.getElementById("newPass").value;
+    if (error) alert(error.message);
+    else {
+        alert("注册成功！");
+        window.location.href = "login.html";
+    }
+}
 
-  localStorage.setItem(newUser, newPass);
-  alert("Registration successful!");
-  window.location.href = "login.html";
-});
+// 登录
+async function login() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) alert(error.message);
+    else window.location.href = "dashboard.html";
+}
+
+// 登出
+async function logout() {
+    await supabase.auth.signOut();
+    window.location.href = "login.html";
+}
