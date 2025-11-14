@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grammar</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar - English App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <h1>Grammar Practice</h1>
 
-<h1>Grammar Lessons</h1>
-<ul>
-    <li>Present Simple</li>
-    <li>Past Simple</li>
-    <li>Future Tense</li>
-</ul>
+  <div id="grammarContent">
+    <p>What is the past tense of "go"?</p>
+    <button onclick="checkGrammar('went')">went</button>
+    <button onclick="checkGrammar('goed')">goed</button>
+  </div>
 
+  <p id="result"></p>
+
+  <script src="app.js"></script>
 </body>
 </html>
