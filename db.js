@@ -1,53 +1,38 @@
+// ---- Supabase 配置 ----
 const SUPABASE_URL = "https://ezpmmgqenszyvfljjwcr.supabase.co";
-const SUPABASE_ANON_KEY = "你的 ANON KEY 放这里";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6cG1tZ3FlbnN6eXZmbGpqd2NyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxMTE0MzcsImV4cCI6MjA3ODY4NzQzN30.G9FI_IxnmsK_TBXgzNVkfMPhvE9lxtVMcKg_sswmS8k";
+
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// 添加单词
-async function addWord() {
-    const word = document.getElementById("word").value;
-
-    const { data, error } = await supabase
-        .from("words")
-        .insert([{ text: word }]);
-
-    if (error) alert(error.message);
-    else loadWords();
-}
-
-// 获取单词
+// ---- 单词：从 Supabase 读取 ----
 async function loadWords() {
-    const { data } = await supabase.from("words").select("*");
+    let { data, error } = await supabase
+        .from("words")
+        .select("*")
+        .order("id", { ascending: true });
 
-    const list = document.getElementById("wordList");
-    list.innerHTML = "";
+    if (error) {
+        console.error("加载 words 失败：", error);
+        return [];
+    }
 
-    data.forEach(item => {
-        const li = document.createElement("li");
-        li.innerText = item.text;
-        list.appendChild(li);
-    });
+    return data;
 }
 
-document.addEventListener("DOMContentLoaded", loadWords);
-
-
-// 保存语法
-async function saveGrammar() {
-    const text = document.getElementById("grammar").value;
-
-    await supabase.from("grammar").insert([{ text }]);
-    loadGrammar();
-}
-
-// 获取语法列表
+// ---- 语法：从 Supabase 读取 ----
 async function loadGrammar() {
-    const { data } = await supabase.from("grammar").select("*");
-    const box = document.getElementById("list");
+    let { data, error } = await supabase
+        .from("grammar")
+        .select("*")
+        .order("id", { ascending: true });
 
-    box.innerHTML = "";
-    data.forEach(item => {
-        box.innerHTML += "<p>" + item.text + "</p>";
-    });
+    if (error) {
+        console.error("加载 grammar 失败：", error);
+        return [];
+    }
+
+    return data;
 }
 
-document.addEventListener("DOMContentLoaded", loadGrammar);
+// 其他页面会调用
+export { loadWords, loadGrammar, supabase };
